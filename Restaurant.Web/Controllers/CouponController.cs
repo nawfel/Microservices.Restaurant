@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Restaurant.Web.Dto;
 using Restaurant.Web.Service.IService;
 
 namespace Restaurant.Web.Controllers
@@ -11,9 +13,16 @@ namespace Restaurant.Web.Controllers
             _couponService = couponService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> CouponIndex()
         {
-            return View();
+            List<CouponDto>? list = new();
+            ResponseDto? response = await _couponService.GetAllCouponsAsync();
+            if(response != null && response.IsSuccess) {
+                list=JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
+
+            }
+
+            return View(list);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CouponAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Coupon")]
     [ApiController]
     public class CouponAPIController : ControllerBase
     {
